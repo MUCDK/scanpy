@@ -29,6 +29,7 @@ def umap(
     random_state: AnyRandom = 0,
     a: Optional[float] = None,
     b: Optional[float] = None,
+    key_added: Optional[str] = None,
     copy: bool = False,
     method: Literal['umap', 'rapids'] = 'umap',
     neighbors_key: Optional[str] = None,
@@ -98,6 +99,9 @@ def umap(
         More specific parameters controlling the embedding. If `None` these
         values are set automatically as determined by `min_dist` and
         `spread`.
+    key_added
+        If not specified, the umap coordinates are stored in .obsm['umap'].
+        If specified, the umap coordinates are added to .obsm[key_added+'_umap'].
     copy
         Return a copy instead of writing to adata.
     method
@@ -113,7 +117,10 @@ def umap(
     -------
     Depending on `copy`, returns or updates `adata` with the following fields.
 
-    **X_umap** : `adata.obsm` field
+    See `key_added` parameter description for the storage path of
+    umap coordinates.
+
+    **umap** : `adata.obsm` field
         UMAP coordinates of data.
     """
     adata = adata.copy() if copy else adata
@@ -125,6 +132,12 @@ def umap(
         raise ValueError(
             f'Did not find .uns["{neighbors_key}"]. Run `sc.pp.neighbors` first.'
         )
+
+    if key_added is None:
+        umap_key = 'umap'
+    else:
+        umap_key = key_added + '_umap'
+
     start = logg.info('computing UMAP')
 
     neighbors = NeighborsView(adata, neighbors_key)
@@ -236,10 +249,11 @@ def umap(
             random_state=random_state,
         )
         X_umap = umap.fit_transform(X_contiguous)
-    adata.obsm['X_umap'] = X_umap  # annotate samples with UMAP coordinates
+    adata.obsm[umap_key] = X_umap  # annotate samples with UMAP coordinates
     logg.info(
         '    finished',
         time=start,
-        deep=('added\n' "    'X_umap', UMAP coordinates (adata.obsm)"),
+        deep=(f'added\n' "    `.uns[{umap_key!r}]` UMAP coordinates"),
     )
     return adata if copy else None
+
