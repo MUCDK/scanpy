@@ -614,12 +614,14 @@ def _wraps_plot_scatter(wrapper):
     scatter_bulk=doc_scatter_embedding,
     show_save_ax=doc_show_save_ax,
 )
-def umap(adata, **kwargs) -> Union[Axes, List[Axes], None]:
+def umap(adata, umap_key: str = 'umap', **kwargs) -> Union[Axes, List[Axes], None]:
     """\
     Scatter plot in UMAP basis.
 
     Parameters
     ----------
+    umap_key
+        key in `.obsm` to look for the coordinates
     {adata_color_etc}
     {edges_arrows}
     {scatter_bulk}
@@ -666,7 +668,7 @@ def umap(adata, **kwargs) -> Union[Axes, List[Axes], None]:
     --------
     tl.umap
     """
-    return embedding(adata, 'umap', **kwargs)
+    return embedding(adata, umap_key, **kwargs)
 
 
 @_wraps_plot_scatter
