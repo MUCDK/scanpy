@@ -41,6 +41,7 @@ from .._utils import (
 )
 from .._docs import (
     doc_adata_color_etc,
+    doc_adata_color_etc_with_key,
     doc_edges_arrows,
     doc_scatter_embedding,
     doc_scatter_spatial,
@@ -57,6 +58,7 @@ from ..._compat import Literal
     edges_arrows=doc_edges_arrows,
     scatter_bulk=doc_scatter_embedding,
     show_save_ax=doc_show_save_ax,
+
 )
 def embedding(
     adata: AnnData,
@@ -605,24 +607,20 @@ def _wraps_plot_scatter(wrapper):
 
 
 # API
-
-
 @_wraps_plot_scatter
 @_doc_params(
-    adata_color_etc=doc_adata_color_etc,
+    adata_color_etc_with_key=doc_adata_color_etc_with_key,
     edges_arrows=doc_edges_arrows,
     scatter_bulk=doc_scatter_embedding,
     show_save_ax=doc_show_save_ax,
 )
-def umap(adata, umap_key: str = 'umap', **kwargs) -> Union[Axes, List[Axes], None]:
+def umap(adata, umap_key: str = "umap", **kwargs) -> Union[Axes, List[Axes], None]:
     """\
     Scatter plot in UMAP basis.
 
     Parameters
     ----------
-    umap_key
-        key in `.obsm` to look for the coordinates
-    {adata_color_etc}
+    {adata_color_etc_with_key}
     {edges_arrows}
     {scatter_bulk}
     {show_save_ax}
