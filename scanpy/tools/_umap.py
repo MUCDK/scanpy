@@ -100,8 +100,8 @@ def umap(
         values are set automatically as determined by `min_dist` and
         `spread`.
     key_added
-        If not specified, the umap coordinates are stored in .obsm['umap'].
-        If specified, the umap coordinates are added to .obsm[key_added+'_umap'].
+        If not specified, the umap coordinates are stored in .obsm['X_umap'].
+        If specified, the umap coordinates are added to .obsm[key_added].
     copy
         Return a copy instead of writing to adata.
     method
@@ -133,10 +133,7 @@ def umap(
             f'Did not find .uns["{neighbors_key}"]. Run `sc.pp.neighbors` first.'
         )
 
-    if key_added is None:
-        umap_key = 'umap'
-    else:
-        umap_key = key_added + '_umap'
+    umap_key = 'X_umap' if key_added is None else key_added
 
     start = logg.info('computing UMAP')
 

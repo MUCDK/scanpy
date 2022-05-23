@@ -609,18 +609,18 @@ def _wraps_plot_scatter(wrapper):
 # API
 @_wraps_plot_scatter
 @_doc_params(
-    adata_color_etc_with_key=doc_adata_color_etc_with_key,
+    adata_color_etc=doc_adata_color_etc,
     edges_arrows=doc_edges_arrows,
     scatter_bulk=doc_scatter_embedding,
     show_save_ax=doc_show_save_ax,
 )
-def umap(adata, umap_key: str = "umap", **kwargs) -> Union[Axes, List[Axes], None]:
+def umap(adata, **kwargs) -> Union[Axes, List[Axes], None]:
     """\
     Scatter plot in UMAP basis.
 
     Parameters
     ----------
-    {adata_color_etc_with_key}
+    {adata_color_etc}
     {edges_arrows}
     {scatter_bulk}
     {show_save_ax}
@@ -666,7 +666,7 @@ def umap(adata, umap_key: str = "umap", **kwargs) -> Union[Axes, List[Axes], Non
     --------
     tl.umap
     """
-    return embedding(adata, umap_key, **kwargs)
+    return embedding(adata, 'umap', **kwargs)
 
 
 @_wraps_plot_scatter
