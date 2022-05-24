@@ -57,7 +57,6 @@ from ..._compat import Literal
     edges_arrows=doc_edges_arrows,
     scatter_bulk=doc_scatter_embedding,
     show_save_ax=doc_show_save_ax,
-
 )
 def embedding(
     adata: AnnData,
@@ -606,6 +605,8 @@ def _wraps_plot_scatter(wrapper):
 
 
 # API
+
+
 @_wraps_plot_scatter
 @_doc_params(
     adata_color_etc=doc_adata_color_etc,

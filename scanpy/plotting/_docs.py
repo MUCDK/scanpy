@@ -23,7 +23,6 @@ layer
     takes precedence over `use_raw`.\
 """
 
-
 doc_edges_arrows = """\
 edges
     Show edges.

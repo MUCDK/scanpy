@@ -29,7 +29,7 @@ def umap(
     random_state: AnyRandom = 0,
     a: Optional[float] = None,
     b: Optional[float] = None,
-    key_added: Optional[str] = None,
+    key_added: str = 'X_umap',
     copy: bool = False,
     method: Literal['umap', 'rapids'] = 'umap',
     neighbors_key: Optional[str] = None,
@@ -100,8 +100,7 @@ def umap(
         values are set automatically as determined by `min_dist` and
         `spread`.
     key_added
-        If not specified, the umap coordinates are stored in .obsm['X_umap'].
-        If specified, the umap coordinates are added to .obsm[key_added].
+        Key for storing the umap coordinates, i.e. they are saved in .obsm[key_added].
     copy
         Return a copy instead of writing to adata.
     method
@@ -132,8 +131,6 @@ def umap(
         raise ValueError(
             f'Did not find .uns["{neighbors_key}"]. Run `sc.pp.neighbors` first.'
         )
-
-    umap_key = 'X_umap' if key_added is None else key_added
 
     start = logg.info('computing UMAP')
 
@@ -250,7 +247,6 @@ def umap(
     logg.info(
         '    finished',
         time=start,
-        deep=(f'added\n' "    `.uns[{umap_key!r}]` UMAP coordinates"),
+        deep=(f'added\n' "    `.obsm[{umap_key!r}]` UMAP coordinates"),
     )
     return adata if copy else None
-
