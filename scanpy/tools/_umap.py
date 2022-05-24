@@ -243,10 +243,10 @@ def umap(
             random_state=random_state,
         )
         X_umap = umap.fit_transform(X_contiguous)
-    adata.obsm[umap_key] = X_umap  # annotate samples with UMAP coordinates
+    adata.obsm[key_added] = X_umap  # annotate samples with UMAP coordinates
     logg.info(
         '    finished',
         time=start,
-        deep=(f'added\n' "    `.obsm[{umap_key!r}]` UMAP coordinates"),
+        deep=(f'added\n' "    `.obsm[{key_added!r}]` UMAP coordinates"),
     )
     return adata if copy else None
