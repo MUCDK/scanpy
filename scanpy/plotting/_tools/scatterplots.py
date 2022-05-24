@@ -41,7 +41,6 @@ from .._utils import (
 )
 from .._docs import (
     doc_adata_color_etc,
-    doc_adata_color_etc_with_key,
     doc_edges_arrows,
     doc_scatter_embedding,
     doc_scatter_spatial,

@@ -23,27 +23,6 @@ layer
     takes precedence over `use_raw`.\
 """
 
-doc_adata_color_etc_with_key = """\
-adata
-    Annotated data matrix.
-umap_key
-    Key of :attr:`anndata.AnnData.obsm` where to look for the umap coordinates.
-color
-    Keys for annotations of observations/cells or variables/genes, e.g.,
-    `'ann1'` or `['ann1', 'ann2']`.
-gene_symbols
-    Column name in `.var` DataFrame that stores gene symbols. By default `var_names`
-    refer to the index column of the `.var` DataFrame. Setting this option allows
-    alternative names to be used.
-use_raw
-    Use `.raw` attribute of `adata` for coloring with gene expression. If `None`,
-    defaults to `True` if `layer` isn't provided and `adata.raw` is present.
-layer
-    Name of the AnnData object layer that wants to be plotted. By default
-    adata.raw.X is plotted. If `use_raw=False` is set, then `adata.X` is plotted.
-    If `layer` is set to a valid layer name, then the layer is plotted. `layer`
-    takes precedence over `use_raw`.\
-"""
 
 doc_edges_arrows = """\
 edges
